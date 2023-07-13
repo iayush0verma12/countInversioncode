@@ -1,0 +1,841 @@
+public static ArrayList<Integer> nextPermutation(ArrayList<Integer> permutation)
+	{
+		int count=0;
+		for(int i=0;i<permutation.size()-1;i++)
+		{
+			if(permutation.get(i)<permutation.get(i+1))
+			{
+				count++;
+			}
+		}
+		if(count==0)
+		{
+			Collections.sort(permutation);
+			return permutation;
+		}
+		for(int i=permutation.size()-2;i>=0;i--)
+		{
+			for(int j=i;j<permutation.size();j++)
+			{
+				if(permutation.get(j)<permutation.get(i+1))
+				{
+					int temp=permutation.get(i);
+					permutation.set(i,permutation.get(i+1));
+					permutation.set(i+1,temp);
+					return permutation;
+				}
+			}
+		}
+		return permutation;
+	}
+
+	return (next_permutation(permutation.begin(),permutation.end()))? permutation:permutation;
+
+
+
+
+
+
+
+	import java.util.* ;
+    import java.io.*;
+    import java.util.ArrayList;
+    import java.util.Collections;
+
+    public class Solution
+    {
+    	public static ArrayList<Integer> nextPermutation(ArrayList<Integer> permutation)
+    	{
+    		// Write your code here.
+    		if(permutation == null || permutation.size() <= 1) {
+                return permutation;
+            }
+
+            int i = permutation.size() - 2;
+            while(i >= 0 && permutation.get(i) >= permutation.get(i + 1)) {
+                i--;
+            }
+
+            if(i >= 0) {
+                int j = permutation.size() - 1;
+                while(permutation.get(j) <= permutation.get(i)) {
+                    j--;
+                }
+                swap(permutation, i, j);
+            }
+
+            reverse(permutation, i + 1, permutation.size() - 1);
+    		return permutation;
+    	}
+
+    	public static void swap(ArrayList<Integer> nums, int i, int j) {
+            int temp = nums.get(i);
+            nums.set(i, nums.get(j));
+            nums.set(j, temp);
+        }
+
+    	public static void reverse(ArrayList<Integer> nums, int i, int j) {
+            while(i < j) {
+                swap(nums, i++, j--);
+            }
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+    import java.util.* ;
+    import java.io.*;
+    /*******************************************************
+
+        Following is the Interval class structure
+
+        class Interval {
+            int start, int finish;
+
+            Interval(int start, int finish) {
+                this.start = start;
+                this.finish = finish;
+            }
+        }
+
+    *******************************************************/
+
+    import java.util.List;
+    import java.util.ArrayList;
+
+    public class Solution {
+        public static List<Interval> mergeIntervals(Interval[] intervals) {
+            // write your code here.
+            int n = intervals.length;
+            ArrayList<Interval> al = new ArrayList<Interval>();
+
+            if(intervals.length == 0 || intervals == null) {
+                return al;
+            }
+
+            // sort the starting points by ascending order
+            Arrays.sort(intervals, (a, b) -> a.start - b.start);
+            int start = intervals[0].start;
+            int end = intervals[0].finish;
+
+            // for an interval, compare its end with the next intervals start
+            for(Interval interval : intervals) {
+                if(interval.start <= end) {
+                    end = Math.max(end, interval.finish);
+                }
+                else {
+                    ans.add(new Interval(start, end));
+                    start = interval.start;
+                    end = interval.finish;
+                }
+            }
+
+            ans.add(new Interval(start, end));
+            return ans;
+        }
+    }
+
+
+
+
+
+    #include <bits/stdc++.h>
+    using namespace std;
+
+    int main() {
+     // your code goes here
+     int t;
+     cin >> t;
+     while(t--)
+     {
+         int n;
+         cin >> n;
+         int a1[n],a2[n];
+         map<int,int>ans;
+         for(int i=0;i<n;i++)
+         {
+             cin >> a1[i];
+             ans[a1[i]]++;
+         }
+         for(int i=0;i<n;i++)
+         {
+             cin >> a2[i];
+             ans[a2[i]]++;
+         }
+         int ans1=0;
+         for(auto it : ans)
+         {
+             if(it.second>ans1)
+             {
+                 ans1=it.second;
+             }
+         }
+         cout << ans1 << endl;
+
+
+
+     }
+     return 0;
+    }
+
+
+
+    2000032171 Shiv Kumar , [12-07-2023 21:15]
+    #include <bits/stdc++.h>
+    using namespace std;
+
+    int main() {
+     // your code goes here
+     int t;
+     cin >> t;
+     while(t--)
+     {
+         int n;
+         cin >> n;
+         int a1[n],a2[n];
+         map<int,int>ans;
+         for(int i=0;i<n;i++)
+         {
+             cin >> a1[i];
+             ans[a1[i]]++;
+         }
+         for(int i=0;i<n;i++)
+         {
+             cin >> a2[i];
+             ans[a2[i]]++;
+         }
+         int ans1=0;
+         for(auto it : ans)
+         {
+             if(it.second>ans1)
+             {
+                 ans1=it.second;
+             }
+         }
+         cout << ans1 << endl;
+
+
+
+     }
+     return 0;
+    }
+
+    Gminxr[], [12-07-2023 21:16]
+    #include <bits/stdc++.h>
+    using namespace std;
+
+    int main() {
+     // your code goes here
+     int t;
+     cin >> t;
+     while(t--)
+     {
+         int n;
+         cin >> n;
+         int a1[n],a2[n];
+         map<int,int>ans;
+         for(int i=0;i<n;i++)
+         {
+             cin >> a1[i];
+             ans[a1[i]]++;
+         }
+         for(int i=0;i<n;i++)
+         {
+             cin >> a2[i];
+             ans[a2[i]]++;
+         }
+         int ans1=0;
+         for(auto it : ans)
+         {
+             if(it.second>ans1)
+             {
+                 ans1=it.second;
+             }
+         }
+         cout << ans1 << endl;
+
+
+
+     }
+     return 0;
+    }
+
+    2000032171 Shiv Kumar , [12-07-2023 21:15]
+    #include <bits/stdc++.h>
+    using namespace std;
+
+    int main() {
+     // your code goes here
+     int t;
+     cin >> t;
+     while(t--)
+     {
+         int n;
+         cin >> n;
+         int a1[n],a2[n];
+         map<int,int>ans;
+         for(int i=0;i<n;i++)
+         {
+             cin >> a1[i];
+             ans[a1[i]]++;
+         }
+         for(int i=0;i<n;i++)
+         {
+             cin >> a2[i];
+             ans[a2[i]]++;
+         }
+         int ans1=0;
+         for(auto it : ans)
+         {
+             if(it.second>ans1)
+             {
+                 ans1=it.second;
+             }
+         }
+         cout << ans1 << endl;
+
+
+
+     }
+     return 0;
+    }
+
+    Gminxr[], [12-07-2023 21:16]
+    #include <bits/stdc++.h>
+    using namespace std;
+
+    int main() {
+     // your code goes here
+     int t;
+     cin >> t;
+     while(t--)
+     {
+         int n;
+         cin >> n;
+         int a1[n],a2[n];
+         map<int,int>ans;
+         for(int i=0;i<n;i++)
+         {
+             cin >> a1[i];
+             ans[a1[i]]++;
+         }
+         for(int i=0;i<n;i++)
+         {
+             cin >> a2[i];
+             ans[a2[i]]++;
+         }
+         int ans1=0;
+         for(auto it : ans)
+         {
+             if(it.second>ans1)
+             {
+                 ans1=it.second;
+             }
+         }
+         cout << ans1 << endl;
+
+
+
+     }
+     return 0;
+    }
+
+    friend, [12-07-2023 21:16]
+    Codechef Div2
+
+    A done ✅✅
+
+    B done ✅✅
+
+    C done ✅✅
+
+    DM me for soultion
+
+    @friends01123
+
+    Join my channel 👇
+
+              @codeforces99
+                @codeforces99
+
+    Codechef Div2
+
+    A done ✅✅
+
+    B done ✅✅
+
+    C done ✅✅
+
+    DM me for soultion
+
+    @friends01123
+
+    Join my channel 👇
+
+              @codeforces99
+                @codeforces99
+
+    All soultion available in C++ and text format
+
+    2000032171 Shiv Kumar , [12-07-2023 21:28]
+    #include <iostream>
+    using namespace std;
+
+    int main() {
+     // your code goes here
+     int t;
+     cin >> t;
+     while(t--)
+     {
+     int a,b,c;
+     cin >> a >> b >> c;
+     int p1=a*b;
+     int p2=a*c;
+     int p3=b*c;
+     if(p1%c==0)
+     {
+         cout << p1 << " " << c << endl;
+     }
+     else if(p2%b==0)
+     {
+         cout << p2 << " " << b << endl;
+     }
+     else if(p3%a==0)
+     {
+         cout << p3 << " " << a << endl;
+     }
+     else
+     {
+         cout << "-1" << endl;
+     }
+     }
+     return 0;
+    }
+
+
+    2000032171 Shiv Kumar , [12-07-2023 21:15]
+    #include <bits/stdc++.h>
+    using namespace std;
+
+    int main() {
+     // your code goes here
+     int t;
+     cin >> t;
+     while(t--)
+     {
+         int n;
+         cin >> n;
+         int a1[n],a2[n];
+         map<int,int>ans;
+         for(int i=0;i<n;i++)
+         {
+             cin >> a1[i];
+             ans[a1[i]]++;
+         }
+         for(int i=0;i<n;i++)
+         {
+             cin >> a2[i];
+             ans[a2[i]]++;
+         }
+         int ans1=0;
+         for(auto it : ans)
+         {
+             if(it.second>ans1)
+             {
+                 ans1=it.second;
+             }
+         }
+         cout << ans1 << endl;
+
+
+
+     }
+     return 0;
+    }
+
+    Gminxr[], [12-07-2023 21:16]
+    #include <bits/stdc++.h>
+    using namespace std;
+
+    int main() {
+     // your code goes here
+     int t;
+     cin >> t;
+     while(t--)
+     {
+         int n;
+         cin >> n;
+         int a1[n],a2[n];
+         map<int,int>ans;
+         for(int i=0;i<n;i++)
+         {
+             cin >> a1[i];
+             ans[a1[i]]++;
+         }
+         for(int i=0;i<n;i++)
+         {
+             cin >> a2[i];
+             ans[a2[i]]++;
+         }
+         int ans1=0;
+         for(auto it : ans)
+         {
+             if(it.second>ans1)
+             {
+                 ans1=it.second;
+             }
+         }
+         cout << ans1 << endl;
+
+
+
+     }
+     return 0;
+    }
+
+    friend, [12-07-2023 21:16]
+    Codechef Div2
+
+    A done ✅✅
+
+    B done ✅✅
+
+    C done ✅✅
+
+    DM me for soultion
+
+    @friends01123
+
+    Join my channel 👇
+
+              @codeforces99
+                @codeforces99
+
+    Codechef Div2
+
+    A done ✅✅
+
+    B done ✅✅
+
+    C done ✅✅
+
+    DM me for soultion
+
+    @friends01123
+
+    Join my channel 👇
+
+              @codeforces99
+                @codeforces99
+
+    All soultion available in C++ and text format
+
+    2000032171 Shiv Kumar , [12-07-2023 21:28]
+    #include <iostream>
+    using namespace std;
+
+    int main() {
+     // your code goes here
+     int t;
+     cin >> t;
+     while(t--)
+     {
+     int a,b,c;
+     cin >> a >> b >> c;
+     int p1=a*b;
+     int p2=a*c;
+     int p3=b*c;
+     if(p1%c==0)
+     {
+         cout << p1 << " " << c << endl;
+     }
+     else if(p2%b==0)
+     {
+         cout << p2 << " " << b << endl;
+     }
+     else if(p3%a==0)
+     {
+         cout << p3 << " " << a << endl;
+     }
+     else
+     {
+         cout << "-1" << endl;
+     }
+     }
+     return 0;
+    }
+
+    . ., [12-07-2023 21:35]
+    int N, M;
+      cin >> N >> M;
+      vector<int> colors(M);
+      for (int i = 0; i < M; i++)
+      {
+        cin >> colors[i];
+      }
+
+      sort(colors.begin(), colors.end());
+
+      int min_boxes = 0;
+      int curr_boxes = 0;
+
+      for (int i = 0; i < M; i++)
+      {
+        curr_boxes += colors[i];
+        if (curr_boxes >= M)
+        {
+          min_boxes++;
+          curr_boxes = 0;
+        }
+      }
+
+      cout << min_boxes << endl;
+
+
+
+
+      2000032171 Shiv Kumar , [12-07-2023 21:15]
+      #include <bits/stdc++.h>
+      using namespace std;
+
+      int main() {
+       // your code goes here
+       int t;
+       cin >> t;
+       while(t--)
+       {
+           int n;
+           cin >> n;
+           int a1[n],a2[n];
+           map<int,int>ans;
+           for(int i=0;i<n;i++)
+           {
+               cin >> a1[i];
+               ans[a1[i]]++;
+           }
+           for(int i=0;i<n;i++)
+           {
+               cin >> a2[i];
+               ans[a2[i]]++;
+           }
+           int ans1=0;
+           for(auto it : ans)
+           {
+               if(it.second>ans1)
+               {
+                   ans1=it.second;
+               }
+           }
+           cout << ans1 << endl;
+
+
+
+       }
+       return 0;
+      }
+
+      Gminxr[], [12-07-2023 21:16]
+      #include <bits/stdc++.h>
+      using namespace std;
+
+      int main() {
+       // your code goes here
+       int t;
+       cin >> t;
+       while(t--)
+       {
+           int n;
+           cin >> n;
+           int a1[n],a2[n];
+           map<int,int>ans;
+           for(int i=0;i<n;i++)
+           {
+               cin >> a1[i];
+               ans[a1[i]]++;
+           }
+           for(int i=0;i<n;i++)
+           {
+               cin >> a2[i];
+               ans[a2[i]]++;
+           }
+           int ans1=0;
+           for(auto it : ans)
+           {
+               if(it.second>ans1)
+               {
+                   ans1=it.second;
+               }
+           }
+           cout << ans1 << endl;
+
+
+
+       }
+       return 0;
+      }
+
+      friend, [12-07-2023 21:16]
+      Codechef Div2
+
+      A done ✅✅
+
+      B done ✅✅
+
+      C done ✅✅
+
+      DM me for soultion
+
+      @friends01123
+
+      Join my channel 👇
+
+                @codeforces99
+                  @codeforces99
+
+      Codechef Div2
+
+      A done ✅✅
+
+      B done ✅✅
+
+      C done ✅✅
+
+      DM me for soultion
+
+      @friends01123
+
+      Join my channel 👇
+
+                @codeforces99
+                  @codeforces99
+
+      All soultion available in C++ and text format
+
+      2000032171 Shiv Kumar , [12-07-2023 21:28]
+      #include <iostream>
+      using namespace std;
+
+      int main() {
+       // your code goes here
+       int t;
+       cin >> t;
+       while(t--)
+       {
+       int a,b,c;
+       cin >> a >> b >> c;
+       int p1=a*b;
+       int p2=a*c;
+       int p3=b*c;
+       if(p1%c==0)
+       {
+           cout << p1 << " " << c << endl;
+       }
+       else if(p2%b==0)
+       {
+           cout << p2 << " " << b << endl;
+       }
+       else if(p3%a==0)
+       {
+           cout << p3 << " " << a << endl;
+       }
+       else
+       {
+           cout << "-1" << endl;
+       }
+       }
+       return 0;
+      }
+
+      2000032171 Shiv Kumar , [12-07-2023 21:59]
+      #include <iostream>
+      using namespace std;
+
+      int main() {
+          int t;
+          cin >>t;
+          while(t--)
+          {
+              int n;
+              cin >> n;
+              int m;
+              cin >> m;
+              int a[m];
+              for(int i=0;i<m;i++)
+              {
+                  cin >> a[i];
+              }
+              int sum=0;
+              for(int i=0;i<m;i++)
+              {
+                 sum+=n-a[i];
+              }
+              cout << max(0,n-sum) << endl;
+          }
+       return 0;
+      }
+
+
+
+#include <iostream>
+#include <bits/stdc++.h>
+
+int main()
+{
+    int numTests;
+    cin >> numTests;
+    while (numTests--)
+    {
+        int length;
+        cin >> length;
+        string inputString;
+        cin >> inputString;
+        if (length % 3 == 1)
+        {
+            cout << "Yes\n";
+            continue;
+        }
+        bool flag = false;
+        for (char ch = 'a'; ch <= 'z'; ch++)
+        {
+            int firstIndex = length + 1, lastIndex = -1;
+            for (int i = 0; i < length; i++)
+            {
+                if (i % 3 == 0 && inputString[i] == ch)
+                {
+                    firstIndex = i;
+                    break;
+                }
+            }
+            for (int i = length - 1; i >= 0; i--)
+            {
+                int x = length - 1 - i;
+                if (x % 3 == 0 && inputString[i] == ch)
+                {
+                    lastIndex = i;
+                    break;
+                }
+            }
+
+            if (firstIndex < lastIndex)
+            {
+                flag = true;
+                break;
+            }
+        }
+        if (flag)
+            cout << "Yes\n";
+        else
+            cout << "No\n";
+    }
+    return 0;
+}
+
+
+
