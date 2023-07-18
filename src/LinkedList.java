@@ -2,10 +2,10 @@ import java.util.HashSet;
 
 public class LinkedList {
 
-    static class Node<Integer>{
+    public static class Node{
         int data;
         Node next;
-        public Node(int data)
+        public Node (int data)
         {
             this.data=data;
             this.next=null;
@@ -13,27 +13,163 @@ public class LinkedList {
     }
     public static Node head;
     public static Node tail;
-    public static int size;
-    public Node findMid(Node head)
-    {
-        Node slow=head;
-        Node fast=head;
-        while(fast!=null && fast.next!=null)
-        {
-            slow=slow.next;
-            fast=fast.next.next;
-        }
-        return slow;
-    }
-    public boolean checkPalindrome()
-    {
 
-        if(head==null||head.next==null)
+    public static int size=0;
+
+    //addFirst
+    public static void addAtFirst(int n)
+    {
+        size++;
+        Node newNode=new Node(n);
+        if(head==null)
         {
-            return true;
+            head=tail=newNode;
+            return;
         }
-        Node mid = findMid(head);
-        Node curr=mid;
+        newNode.next=head;
+        head=newNode;
+    }
+
+    public static void addLast(int n)
+    {
+        size++;
+        Node newNode=new Node(n);
+        if(head==null)
+        {
+            head=tail=newNode;
+            return;
+        }
+
+        tail.next=newNode;
+        tail=newNode;
+    }
+    public static void print()
+    {
+        Node temp=head;
+        if(head==null)
+        {
+            System.out.println("Null");
+            return;
+        }
+
+        while(temp!=null)
+        {
+            System.out.print(temp.data+"->");
+            temp=temp.next;
+        }
+        System.out.println("null");
+    }
+    public static void addMiddle(int n,int idx)
+    {
+        size++;
+        if(idx==0)
+        {
+            addAtFirst(n);
+            return;
+        }
+        Node newNode=new Node(n);
+        Node temp=head;
+        for(int i=0;i<idx-1;i++)
+        {
+            temp=temp.next;
+        }
+        newNode.next=temp.next;
+        temp.next=newNode;
+
+
+    }
+    public static void removeFirst()
+    {
+        size--;
+        if(head==null)
+        {
+            head=tail=null;
+            System.out.println("Nothing to Remove!");
+            return;
+        }
+        head=head.next;
+    }
+
+    public static void removeLast()
+    {
+        size--;
+        if(head==null)
+        {
+            head=tail=null;
+            System.out.println("Nothing to Remove!");
+            return;
+        }
+        Node temp=head;
+        for(int i=0;i<size-1;i++)
+        {
+            temp=temp.next;
+        }
+        temp.next=null;
+    }
+    public static void removeAt(int idx)
+    {
+        size--;
+        if(head==null)
+        {
+            head=tail=null;
+            return;
+        }
+        Node temp=head;
+        for(int i=0;i<idx-1;i++)
+        {
+            temp=temp.next;
+        }
+        temp.next=temp.next.next;
+
+    }
+    public static void iterative(int k)
+    {
+        Node temp=head;
+        int cnt=0;
+        while(temp!=null)
+        {
+            if(temp.data==k)
+            {
+                System.out.println("Key found at : "+cnt );
+            }
+            cnt++;
+            temp=temp.next;
+        }
+    }
+    public static int recursion(Node temp, int key , int i)
+    {
+        if(temp==null)
+        {
+            System.out.println("Key Not Found!");
+            return -1;
+        }
+        if(temp.data==key)
+        {
+            return i;
+        }
+        return recursion(temp.next,key,i+1);
+    }
+    public static int recScnd(Node head,int key)
+    {
+        if(head==null)
+        {
+            return -1;
+        }
+        if(head.data==key)
+        {
+            return 0;
+        }
+        int idx=recScnd(head.next,key);
+        if(idx==-1)
+        {
+            return -1;
+        }
+        return idx+1;
+
+    }
+    public static void reverse_iterative()
+    {
+        Node curr=tail=head;
         Node prev=null;
         Node next;
         while(curr!=null)
@@ -43,300 +179,149 @@ public class LinkedList {
             prev=curr;
             curr=next;
         }
-        Node right=prev;
-        Node left=head;
-        while(right!=null)
-        {
-            if(left.data!=right.data)
-            {
-                return false;
-            }
-            left=left.next;
-            right=right.next;
-        }
-        return true;
+        head=prev;
     }
-    public void addFirst(int data)
+    public static Node getMid(Node head)
     {
-        Node newNode= new Node(data);
-        size++;
-        if(head==null)
+        Node slow=head;
+        Node fast=head.next;
+        while(fast!=null && fast.next!=null)
         {
-            head=tail=newNode;
-            return;
+            slow=slow.next;
+            fast=fast.next.next;
         }
-        newNode.next=head;
-        head=newNode;
+        return slow;
     }
-    public void addLast(int data)
+    public static Node mergeSortLL(Node head)
     {
-        Node newNode= new Node(data);
-        size++;
-        if(head==null)
+        if(head==null ||head.next==null)
         {
-            head=tail=null;
-            return;
+            return head;
         }
-        tail.next=newNode;
-        tail=newNode;
-    }
+        //get mid
+        Node mid=getMid(head);
+        Node rh=mid.next;
+        mid.next=null;
 
-//    public int RemoveFirst()
-//    {
-//        if(size==0)
-//        {
-//            System.out.println("LL is empty");
-//        }
-//        else if(size==1)
-//        {
-//            int val=head.data;
-//            head=tail=null;
-//            return val;
-//        }
-//        int val=head.data;
-//        head=head.next;
-//        size--;
-//        return val;
-//    }
-//    public void add(int idx,int data)
-//    {
-//        if(idx==0)
-//        {
-//            addFirst(data);
-//            return;
-//        }
-//        Node newNode=new Node(data);
-//        size++;
-//        Node temp=head;
-//        int i=0;
-//        while(i<idx-1)
-//        {
-//            temp=temp.next;
-//            i++;
-//        }
-        //i=idx-1;
-    //9155693607
-//        newNode.next=temp.next;
-//        temp.next=newNode;
-//
-//    }
-//    public int RemoveLast()
-//    {
-//        if(size==0)
-//        {
-//            System.out.println("Empty");
-//            return Integer.MIN_VALUE;
-//        }
-//        else if(size==1)
-//        {
-//            int val=head.data;
-//            head=tail=null;
-//            size=0;
-//            return val;
-//        }
-//        Node prev=head;
-//        for(int i=0;i<size-2;i++)
-//        {
-//            prev=prev.next;
-//        }
-//        int val=prev.next.data;
-//        prev.next=null;
-//        tail=prev;
-//        size--;
-//        return val;
-//    }
-    public void print()
+        Node newleft=mergeSortLL(head);
+        Node newright=mergeSortLL(rh);
+       return mergeLL(newleft,newright);
+    }
+    public static Node mergeLL(Node lh, Node rh)
     {
-        if(head==null)
+
+//        mid.next=null;
+        //
+        Node mergedLL=new Node(-1);
+        Node temp=mergedLL;
+        while(lh!=null && rh!=null)
         {
-            System.out.println("LL is empty");
+            if(lh.data>rh.data)
+            {
+                temp.next=rh;
+                rh=rh.next;
+                temp=temp.next;
+            }
+            else
+            {
+                temp.next=lh;
+                lh=lh.next;
+                temp=temp.next;
+            }
         }
-        Node temp=head;
-        while(temp!=null)
+        while(lh!=null)
         {
-            System.out.print(temp.data+"->");
+            temp.next=lh;
+            lh=lh.next;
             temp=temp.next;
         }
-        System.out.println("null");
-    }
-//    public int itrSearch(int key)
-//    {
-//        Node temp= head;
-//        int i=0;
-//        while(temp!=null)
-//        {
-//            if(temp.data==key)
-//            {
-//                return i;
-//            }
-//            i++;
-//        }
-//        return -1;
-//    }
-//    public int recSearch(Node head,int key)
-//    {
-//        if(head==null)
-//        {
-//            return -1;
-//        }
-//        if(head.data==key)
-//        {
-//            return 0;
-//        }
-//        int idx=recSearch(head.next,key);
-//        if(idx==-1)
-//        {
-//            return -1;
-//        }
-//        return idx+1;
-//
-//    }
-//    public void reverse()
-//    {
-//        Node prev=null;
-//        Node curr=tail=head;
-//        Node next;
-//        while(curr!=null)
-//        {
-//            next=curr.next;
-//            curr.next=prev;
-//            prev=curr;
-//            curr=next;
-//        }
-//        head=prev;
-//    }
-//    public void deleteNthFromEnd(int n)
-//    {
-//        int sz=0;
-//        Node temp=head;
-//        while(temp!=null)
-//        {
-//            temp=temp.next;
-//            sz++;
-//        }
-//        if(n==sz)
-//        {
-//            head=head.next;//remove first operation
-//            return;
-//        }
-//        int idxToFind=sz-n;
-//        int i=0;
-//        Node prev=head;
-//        while(i<idxToFind)
-//        {
-//            prev=prev.next;
-//            i++;
-//        }
-//        prev.next=prev.next.next;
-//        return;
-//    }
-//    boolean areIdentical(LinkedList l2)
-//    {
-//        Node a = head, b = l2.head;
-//        while (a != null && b != null) {
-//            if (a.data != b.data)
-//                return false;
-//
-//            /* If we reach here, then a and b are not null
-//               and their data is same, so move to next nodes
-//               in both lists */
-//            a = a.next;
-//            b = b.next;
-//        }
-//
-//        // If linked lists are identical, then 'a' and 'b'
-//        // must be null at this point.
-//        return (a == null && b == null);
-//    }
-    public static boolean isCycle()
-    {
-        Node slow=head;
-        Node fast=head;
-        while(fast!=null&&fast.next!=null)
+        while(rh!=null)
         {
-            slow=slow.next;
-            fast=fast.next.next;
-            if(slow==fast)
-            {
-                return true;
-            }
+            temp.next=rh;
+            rh=rh.next;
+            temp=temp.next;
         }
-        return false;
-    }
-    public void RemoveCycle()
-    {
-        // Detect Cycle
-        // Find Last Node
-        Node slow=head;
-        Node fast=head;
-        boolean isCycle=false;
-        while(fast!=null&&fast.next!=null)
-        {
-            slow=slow.next;
-            fast=fast.next.next;
-            if(slow==fast)
-            {
-                isCycle=true;
-                break;
-            }
-        }
-        if(isCycle == false)
-        {
-            return;
-        }
-        slow=head;
-        Node prev=null;
-        while(slow!=fast)
-        {
-            prev=fast;
-            slow=slow.next;
-            fast=fast.next;
-        }
-        prev.next=null;
+        return mergedLL.next;
     }
 
-    public static void main(String args[]){
-      LinkedList ll = new LinkedList();
-//        LinkedList l2= ll;
-//        ll.addFirst(1);
-//        ll.addFirst(2);
-//        ll.addFirst(4);
-//        ll.addFirst(3);
-//        ll.addLast(5);
+    public static void zigzagLL()
+    {
+        //find middle
+        Node mid=getMid(head);
+
+
+        Node curr=mid.next;
+        mid.next=null;
+        Node prev=null;
+        Node next;
+        while(curr!=null)
+        {
+            next=curr.next;
+            curr.next=prev;
+            prev=curr;
+            curr=next;
+        }
+        Node lh=head;
+        Node rh=prev;
+//        mid.next=null;
+
+        Node nextLeft;
+        Node nextRight;
+        while(lh!=null && rh!=null) {
+            nextLeft = lh.next;
+            lh.next = rh;
+            nextRight = rh.next;
+            rh.next = nextLeft;
+
+            lh=nextLeft;
+            rh=nextRight;
+        }
+    }
+
+
+    public static void main(String[] args) {
+        LinkedList ll =new LinkedList();
+        ll.addLast(1);
+        ll.addLast(2);
+        ll.addLast(3);
+        ll.addLast(4);
+        ll.addLast(5);
+
+        print();
+//        ll.head=mergeSortLL(ll.head);
+        zigzagLL();
+        ll.print();
+//        Node one=head;
+//        Node two=head;
+//        one.data=one.data+two.data;
+//        ll.print();
+//        ll.print();
+//        ll.addAtFirst(5);
 //        ll.addLast(6);
-//        ll.add(2,8);
-//        ll.print();
-//        ll.RemoveFirst();
-//        ll.print();
-//        ll.RemoveLast();
+//        ll.addLast(7);
+//        ll.addLast(8);
+//        ll.addLast(9);
+//        ll.addLast(10);
 //        ll.print();
 //        System.out.println(ll.size);
-//        System.out.println(ll.recSearch(head,4));
-//        ll.reverse();
+//        ll.addMiddle(50987,2);
 //        ll.print();
-//        ll.deleteNthFromEnd(3);
+//        ll.removeFirst();
 //        ll.print();
-//        if (ll.areIdentical(l2))
-//            System.out.println("Identical ");
-//        else
-//            System.out.println("Not identical ");
-//    }
-        /*ll.addFirst(1);
-        ll.addFirst(2);
-        ll.addFirst(2);
-        ll.addFirst(1);*/
-       /* ll.print();
-        System.out.println(ll.checkPalindrome());*/
-        head= new Node(1);
-        Node temp=new Node(2);
-        head.next=temp;
-        head.next.next=new Node(3);
-        head.next.next.next=temp;
-        System.out.println(isCycle());
-        ll.RemoveCycle();
-        System.out.println(isCycle());
-        ll.print();
-        HashSet<Integer>hs = new HashSet<>();
+//        System.out.println(size);
+//        ll.removeLast();
+//        ll.print();
+//        System.out.println(ll.size);
+//        ll.removeAt(4);
+//        ll.print();
+//        System.out.println(ll.size);
+//        ll.iterative(7);
+//        Node temp=head;
+//        int key=7;
+//        System.out.println("Key found at : "+ll.recursion(temp,key,0));
+//        System.out.println("Ket found at :"+ll.recScnd(head,key));
+//        ll.reverse_iterative();
+//        ll.print();
 
     }
 }

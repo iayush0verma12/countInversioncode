@@ -839,3 +839,151 @@ int main()
 
 
 
+most frequent elements
+
+ Arrays.sort(nums);
+        int K=k;
+        int num[]=new int[nums.length];
+        int p=0;
+        int max=Integer.MIN_VALUE;
+        for(int i=nums.length-1;i>=0;i--)
+        {
+            num[p]=nums[i];
+            p++;
+        }
+        int count=0;
+        for(int i=0;i<num.length;i++)
+        {
+            count=0;
+            ArrayList<Integer>al=new ArrayList<>();
+            int a=num[i];
+            for(int j=i;j<num.length;j++)
+            {
+                int b=num[j];
+                al.add(a-b);
+            }
+            for(int l=0;l<al.size();l++)
+            {
+                if(al.get(l)<=k)
+                {
+                    count++;
+                    k=k-al.get(l);
+                }
+            }
+            max=Math.max(count,max);
+            k=K;
+        }
+        return max;
+
+
+
+        beautiful array
+
+        // al.add(1);
+                // while(al.size()<n)
+                // {
+                //     ArrayList<Integer>temp=new ArrayList<>();
+                //     for(int i:al)
+                //     {
+                //         if(i*2-1<=n)
+                //         {
+                //             temp.add(i*2-1);
+                //         }
+                //     }
+                //     for(int i:al)
+                //     {
+                //         if(i*2<=n)
+                //         {
+                //             temp.add(i*2);
+                //         }
+                //     }
+                //     al=temp;
+                // }
+                // int res[]=new int[n];
+                // // return al.stream().mapToInt(i -> i).toArray();
+                // for(int i=0;i<n;i++)
+                // {
+                //     res[i]=al.get(i);
+                // }
+                // System.gc();
+                // return res;
+
+
+
+                class LRUCache {
+
+                    class Node {
+                        int key;
+                        int val;
+                        Node next;
+                        Node prev;
+
+                        public Node(int key, int val) {
+                            this.key = key;
+                            this.val = val;
+                            next = null;
+                            prev = null;
+                        }
+                    }
+
+                    HashMap<Integer, Node> hashMap;
+                    Node MRU;
+                    Node LRU;
+                    int capacity;
+
+                    public LRUCache(int capacity) {
+                        this.capacity = capacity;
+                        hashMap = new HashMap<>();
+                        MRU = new Node(-1, -1);
+                        LRU = new Node(-1, -1);
+                        MRU.next = LRU;
+                        LRU.prev = MRU;
+
+                    }
+
+                    private void addNode(Node newNode) {
+                        Node temp = MRU.next;
+                        MRU.next = newNode;
+                        newNode.prev = MRU;
+                        newNode.next = temp;
+                        temp.prev = newNode;
+                    }
+
+                    private void deleteNode(Node node) {
+                        Node prev = node.prev;
+                        Node next = node.next;
+                        prev.next = next;
+                        next.prev = prev;
+                    }
+
+
+                    public int get(int key) {
+                        if (!hashMap.containsKey(key))
+                            return -1;
+                        put(key,hashMap.get(key).val);
+                        return hashMap.get(key).val;
+
+                    }
+
+                    public void put(int key, int value) {
+                        if (hashMap.containsKey(key)) {
+                            Node node = hashMap.get(key);
+                            deleteNode(node);
+                            node.val = value;
+                            addNode(node);
+                            hashMap.put(key, MRU.next);
+                        } else {
+                            if (hashMap.size() == capacity) {
+                                Node prev = LRU.prev;
+                                deleteNode(prev);
+                                hashMap.remove(prev.key);
+                            }
+                            Node newNode = new Node(key, value);
+                            addNode(newNode);
+                            hashMap.put(key, MRU.next);
+                        }
+                    }
+                }
+
+
+
