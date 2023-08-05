@@ -76,11 +76,6 @@ public class Sudoku {
     }
     public static void main(String[] args) {
 
-        for(char c='1';c<='9';c++)
-        {
-            System.out.println(c);
-        }
-
         int sudoku[][]={{0, 0, 8, 0, 0, 0, 0, 0, 0},
                 {4, 9, 0, 1, 5, 7, 0, 0, 2},
                 {0, 0, 3, 0, 0, 4, 1, 9, 0},

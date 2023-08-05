@@ -3,7 +3,7 @@ public class letecodeProblem {
 
     // 1035 pod
 
-//    class Solution {
+//    class CircularArrayQueue {
 //        public int maxUncrossedLines(int[] nums1, int[] nums2) {
 //            int[] dp = new int[nums2.length+1];
 //
@@ -23,7 +23,7 @@ public class letecodeProblem {
 //        }
 //    }
 
- /*   class Solution {
+ /*   class CircularArrayQueue {
         public int maxUncrossedLines(int[] nums1, int[] nums2) {
             // Arrays.sort(nums1);
             // Arrays.sort(nums2);

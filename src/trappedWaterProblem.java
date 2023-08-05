@@ -27,7 +27,7 @@ public class trappedWaterProblem {
     }
     public static void main(String args[])
     {
-        int height[]={6,4,2,0,1,3,4,7,8}/*{0,1,0,2,1,0,1,3,2,2,1,2}*/;
+        int height[]={4,2,0,3,2,5}/*{0,1,0,2,1,0,1,3,2,2,1,2}*/;
         trappedWater(height);
         System.out.println("Water Level Trapped here is "+trappedWater(height));
         //Calculate left boundary

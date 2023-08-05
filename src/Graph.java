@@ -74,7 +74,7 @@ public class Graph {
     public static boolean dfsSearch(ArrayList<edge>graph[],int source,boolean vst[],int dest)
     {
         //visit
-//        System.out.print(curr+ " ");
+//        System.out.print(QueueUsingLL+ " ");
         if(source==dest)
         {
             return true;

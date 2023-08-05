@@ -99,7 +99,7 @@ public class Practice25jan {
     {
         for(int i=0;i<arr.length;i++)
         {
-//            int curr=arr[i];
+//            int QueueUsingLL=arr[i];
             for(int j=i+1;j<arr.length;j++)
             {
                 System.out.print("("+arr[i]+" , "+arr[j]+")");
@@ -311,14 +311,14 @@ public class Practice25jan {
         //InsertionSort
         /*for(int i=0;i<arr.length;i++)
         {
-            int curr=i;
+            int QueueUsingLL=i;
             int prev=i-1;
-            while(prev>=0&&arr[prev]>arr[curr])
+            while(prev>=0&&arr[prev]>arr[QueueUsingLL])
             {
                 arr[prev+1]=arr[prev];
                 prev--;
             }
-            arr[prev+1]=arr[curr];
+            arr[prev+1]=arr[QueueUsingLL];
         }
         printsortedarray(arr);*/
 

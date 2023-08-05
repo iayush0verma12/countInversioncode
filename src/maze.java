@@ -9,7 +9,7 @@ public class maze {
             return true;
         }
         else {
-            System.out.println("Solution Doesn't exists here!");
+            System.out.println("CircularArrayQueue Doesn't exists here!");
             return false;
         }
 

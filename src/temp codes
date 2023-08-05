@@ -42,7 +42,7 @@ public static ArrayList<Integer> nextPermutation(ArrayList<Integer> permutation)
     import java.util.ArrayList;
     import java.util.Collections;
 
-    public class Solution
+    public class CircularArrayQueue
     {
     	public static ArrayList<Integer> nextPermutation(ArrayList<Integer> permutation)
     	{
@@ -110,7 +110,7 @@ public static ArrayList<Integer> nextPermutation(ArrayList<Integer> permutation)
     import java.util.List;
     import java.util.ArrayList;
 
-    public class Solution {
+    public class CircularArrayQueue {
         public static List<Interval> mergeIntervals(Interval[] intervals) {
             // write your code here.
             int n = intervals.length;
@@ -984,6 +984,309 @@ most frequent elements
                         }
                     }
                 }
+
+
+
+merge k sorted strings
+
+class CircularArrayQueue {
+    public ListNode mergeKLists(ListNode[] lists) {
+        //both head
+        //mergesort
+        //merge
+        if(lists==null ||lists.length==0)
+        {
+            return null;
+        }
+        return mergeKListshelper(lists,0,lists.length-1);
+    }
+    public ListNode mergeKListshelper(ListNode[] lists, int start, int end)
+    {
+        if(start==end)
+        {
+            return lists[start];
+        }
+        if(start+1==end)
+        {
+            return merge(lists[start],lists[end]);
+        }
+        int mid=start+(end-start)/2;
+        ListNode left=mergeKListshelper(lists,start,mid);
+        ListNode right=mergeKListshelper(lists,mid+1,end);
+        return merge(left,right);
+    }
+    public ListNode merge(ListNode l1, ListNode l2)
+    {
+        ListNode mergeLL= new ListNode(-1);
+        ListNode temp=mergeLL;
+        while(l1!=null && l2!=null)
+        {
+            if(l1.val>l2.val)
+            {
+                temp.next=l2;
+                l2=l2.next;
+                temp=temp.next;
+            }
+            else
+            {
+                temp.next=l1;
+                l1=l1.next;
+                temp=temp.next;
+            }
+        }
+        while(l1!=null)
+        {
+            temp.next=l1;
+            l1=l1.next;
+            temp=temp.next;
+        }
+        while(l2!=null)
+        {
+            temp.next=l2;
+            l2=l2.next;
+            temp=temp.next;
+        }
+        return mergeLL.next;
+    }
+}
+
+
+
+
+
+class CircularArrayQueue {
+    public int[] getMaximumXor(int[] nums, int maximumBit) {
+        int xor = 0, n = nums.length;
+        int max = (1 << maximumBit) - 1;
+        int res[] = new int[n];
+
+        for(int e : nums) xor ^= e;//xor all elements
+
+        for(int i = 0; i < n; i++){
+            res[i] = xor ^ max;// k = xor ^ max
+            xor ^= nums[n - i - 1];//remove last element from xor
+        }
+        return res;
+    }
+}
+
+
+class CircularArrayQueue {
+    public int minSpeedOnTime(int[] dist, double hour) {
+        if(hour<dist.length-1) return -1;
+        int l = 0;
+        int r = 10000000;
+        int m;
+        int ans = -1;
+        while(l<=r){
+            m = (l+r)/2;
+            if(check(dist, hour, m)){
+                ans = m;
+                r = m-1;
+            }else{
+                l = m+1;
+            }
+        }
+        return ans;
+    }
+
+    public boolean check(int [] dist, double hour, double speed){
+
+        double time = 0;
+        int i = 0;
+        while(time<=hour && i<dist.length-1){
+            time += Math.ceil(dist[i]/speed);
+            i++;
+        }
+        time +=dist[dist.length-1]/speed;
+        return (time<=hour);
+    }
+}
+
+
+
+
+class Solution {
+    public boolean isValidSudoku(char[][] board) {
+        Set<String> visited = new HashSet<>();
+
+        for(int i = 0; i < board.length; i++) {
+            for(int j = 0; j < board[0].length; j++) {
+                if(board[i][j] == '.') {
+                    continue;
+                }
+
+                if(!visited.add(String.valueOf(board[i][j]) + " in row " + i) || !visited.add(String.valueOf(board[i][j]) + " in col " + j) || !visited.add(String.valueOf(board[i][j]) + " in box " + i/3 + "-" + j/3)) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+}
+
+
+
+
+class MyQueue {
+    public Stack<Integer> stk1 = new Stack<>();
+    public Stack<Integer> stk2 = new Stack<>();
+
+    public MyQueue() {
+
+    }
+
+    public void push(int x) {
+        while(!stk1.isEmpty())
+        {
+            stk2.push(stk1.pop());
+        }
+        stk1.push(x);
+        while(!stk2.isEmpty())
+        {
+            stk1.push(stk2.pop());
+        }
+    }
+
+    public int pop() {
+        if(!stk1.isEmpty())
+        {
+            return stk1.pop();
+        }
+        return -1;
+    }
+
+    public int peek() {
+        if(!stk1.isEmpty())
+        {
+            return stk1.peek();
+        }
+        return -1;
+    }
+
+    public boolean empty() {
+        return stk1.isEmpty();
+    }
+}
+
+/**
+ * Your MyQueue object will be instantiated and called as such:
+ * MyQueue obj = new MyQueue();
+ * obj.push(x);
+ * int param_2 = obj.pop();
+ * int param_3 = obj.peek();
+ * boolean param_4 = obj.empty();
+ */
+
+
+ class MyStack {
+     Queue<Integer> q1;
+     public MyStack() {
+         q1 = new LinkedList<>();
+     }
+
+     public void push(int x) {
+         q1.add(x);
+         for(int i=0; i<q1.size()-1; i++){
+             q1.add(q1.remove());
+         }
+     }
+
+     public int pop() {
+         int removed = q1.remove();
+         return removed;
+     }
+
+     public int top() {
+         int peeked = q1.peek();
+         return peeked;
+     }
+
+     public boolean empty() {
+         return q1.isEmpty();
+     }
+ }
+
+
+ //======================Basic Approach=============================
+ class MyStack {
+     Queue<Integer> q1;
+     Queue<Integer> q2;
+     public MyStack() {
+         q1 = new LinkedList<>();
+         q2 = new LinkedList<>();
+     }
+
+     public void push(int x) {
+         q2.add(x);
+         while(!q1.isEmpty()){
+             q2.add(q1.remove());
+         }
+         Queue<Integer> temp = q1;
+         q1 = q2;
+         q2 = temp;
+     }
+
+     public int pop() {
+         int removed = q1.remove();
+         return removed;
+     }
+
+     public int top() {
+         int peeked = q1.peek();
+         return peeked;
+     }
+
+     public boolean empty() {
+         return q1.isEmpty();
+     }
+ }
+
+ /**
+  * Your MyStack object will be instantiated and called as such:
+  * MyStack obj = new MyStack();
+  * obj.push(x);
+  * int param_2 = obj.pop();
+  * int param_3 = obj.top();
+  * boolean param_4 = obj.empty();
+  */
+
+
+
+
+  class Solution {
+      List<List<Integer>> ans = new ArrayList<>();
+
+      void solve(int[] nums, int[] per, int c) {
+          if (c == nums.length) {
+              List<Integer> permutation = new ArrayList<>();
+              for (int num : per) {
+                  permutation.add(num);
+              }
+              ans.add(permutation);
+              return;
+          }
+          for (int i = 0; i < nums.length; i++) {
+              if (per[i] == 11) {
+                  per[i] = nums[c];
+                  solve(nums, per, c + 1);
+                  per[i] = 11;
+              }
+          }
+      }
+
+      public List<List<Integer>> permute(int[] nums) {
+          int n = nums.length;
+          int[] per = new int[n];
+          for (int i = 0; i < n; i++) {
+              per[i] = 11;
+          }
+          solve(nums, per, 0);
+          return ans;
+      }
+  }
+
 
 
 

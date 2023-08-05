@@ -33,15 +33,15 @@
 //            return true;
 //        }
 //        Node mid = findMid(head);
-//        Node curr=mid;
+//        Node QueueUsingLL=mid;
 //        Node prev=null;
 //        Node next;
-//        while(curr!=null)
+//        while(QueueUsingLL!=null)
 //        {
-//            next=curr.next;
-//            curr.next=prev;
-//            prev=curr;
-//            curr=next;
+//            next=QueueUsingLL.next;
+//            QueueUsingLL.next=prev;
+//            prev=QueueUsingLL;
+//            QueueUsingLL=next;
 //        }
 //        Node right=prev;
 //        Node left=head;
@@ -194,14 +194,14 @@
 ////    public void reverse()
 ////    {
 ////        Node prev=null;
-////        Node curr=tail=head;
+////        Node QueueUsingLL=tail=head;
 ////        Node next;
-////        while(curr!=null)
+////        while(QueueUsingLL!=null)
 ////        {
-////            next=curr.next;
-////            curr.next=prev;
-////            prev=curr;
-////            curr=next;
+////            next=QueueUsingLL.next;
+////            QueueUsingLL.next=prev;
+////            prev=QueueUsingLL;
+////            QueueUsingLL=next;
 ////        }
 ////        head=prev;
 ////    }

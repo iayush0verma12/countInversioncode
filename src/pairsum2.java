@@ -54,7 +54,7 @@ public class pairsum2 {
 
 
 
-//        class Solution {
+//        class CircularArrayQueue {
 //            public boolean search(int[] nums, int target) {
 //
 //                //breaking point

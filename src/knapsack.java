@@ -33,8 +33,6 @@ public class knapsack {
 
         }
         System.out.println(val);
-
-
     }
     public static void main(String[] args) {
         int[] weight ={10,20,30};

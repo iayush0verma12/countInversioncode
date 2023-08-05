@@ -29,7 +29,7 @@ public class compressString {
 
 
 /*
-class Solution {
+class CircularArrayQueue {
     public int compress(char[] chars) {
         int i=0,k=0;
         while(i<chars.length){
